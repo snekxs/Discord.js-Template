@@ -14,27 +14,5 @@ module.exports = {
         .setName("check")
         .setDescription("Check if any products in queue"),
     async execute(interaction) {
-        await supabase
-            .from("ProductsInQueue")
-            .select("*")
-            .then((response) => {
-                const data = response.data
-
-                if (response.data.length === 0) {
-                    await interaction.reply("No Products In Queue")
-                } else {
-
-                    data.forEach(product => {
-                        const name = product.name;
-                        const brand = product.brand;
-                        const type = product.type;
-                        const image = product.image_url
-                        await interaction.followUp(`Name: ${name} Brand: ${brand} Type: ${type} Image: ${image}`);
-                    });
-                }
-            })
-            .catch((error) => {
-                console.log("error", error);
-            });
-    },
+        interaction.reply("FIX ME CUNT")
 };
