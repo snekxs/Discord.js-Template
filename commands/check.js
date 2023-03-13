@@ -16,3 +16,4 @@ module.exports = {
     async execute(interaction) {
         interaction.reply("FIX ME CUNT")
 }
+}
