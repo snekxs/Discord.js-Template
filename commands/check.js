@@ -21,7 +21,7 @@ module.exports = {
                 const data = response.data
 
                 if (response.data.length === 0) {
-                    interaction.reply("No Products In Queue")
+                    await interaction.reply("No Products In Queue")
                 } else {
 
                     data.forEach(product => {
@@ -29,7 +29,7 @@ module.exports = {
                         const brand = product.brand;
                         const type = product.type;
                         const image = product.image_url
-                        interaction.followUp(`Name: ${name} Brand: ${brand} Type: ${type} Image: ${image}`);
+                        await interaction.followUp(`Name: ${name} Brand: ${brand} Type: ${type} Image: ${image}`);
                     });
                 }
             })
