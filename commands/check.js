@@ -15,4 +15,4 @@ module.exports = {
         .setDescription("Check if any products in queue"),
     async execute(interaction) {
         interaction.reply("FIX ME CUNT")
-};
+}
