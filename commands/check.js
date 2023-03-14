@@ -1,5 +1,6 @@
-const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, Events } = require("discord.js");
 const { createClient } = require('@supabase/supabase-js')
+
 
 const supabaseUrl = "https://ridzyuyhihrriayeweqw.supabase.co";
 const supabaseKey =
@@ -14,6 +15,42 @@ module.exports = {
         .setName("check")
         .setDescription("Check if any products in queue"),
     async execute(interaction) {
-        interaction.reply("FIX ME CUNT")
-    }
-}
+        await supabase.from("ProductsInQueue").select('*').then((response)=>{
+            const data = response.data;
+            const count =  data.length;
+
+            if (count === 0) {
+                interaction.reply("No products in queue");
+            } else {
+                for (let i = 0; i < count; i++) {
+            const row = new ActionRowBuilder()
+			.addComponents(
+				new ButtonBuilder()
+					.setCustomId('add')
+					.setLabel('Add')
+					.setStyle(ButtonStyle.Success),
+			)
+            .addComponents(
+				new ButtonBuilder()
+					.setCustomId('rejext')
+					.setLabel('Reject')
+					.setStyle(ButtonStyle.Danger),
+			);
+                    const embed = new EmbedBuilder()
+                        .setTitle(data[i].name)
+                        .addFields(
+                            { name: 'Brand', value: `${data[i].brand}`, inline: true },
+                            { name: 'Type', value: `${data[i].type}`, inline: true },
+                        )
+                        .setImage(data[i].image_url);
+
+                        interaction.channel.send({ embeds: [embed], components: [row] });
+                }
+            }
+        });
+    },
+};
+
+
+
+
