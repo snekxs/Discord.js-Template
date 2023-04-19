@@ -32,7 +32,7 @@ module.exports = {
 			)
             .addComponents(
 				new ButtonBuilder()
-					.setCustomId('rejext')
+					.setCustomId('reject')
 					.setLabel('Reject')
 					.setStyle(ButtonStyle.Danger),
 			);
