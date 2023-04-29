@@ -44,7 +44,8 @@ module.exports = {
                         )
                         .setImage(data[i].image_url);
 
-                        interaction.channel.send({ embeds: [embed], components: [row] });
+                        interaction.reply({ embeds: [embed], components: [row] });
+
                 }
             }
         });

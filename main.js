@@ -13,7 +13,14 @@ const deployCommands = require("./deploy-commands.js");
 console.clear();
 deployCommands.deployCommands();
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildMembers,
+  ],
+});
 
 client.commands = new Collection();
 // eslint-disable-next-line no-undef
@@ -54,6 +61,21 @@ client.on(Events.InteractionCreate, async (interaction) => {
       content: "There was an error while executing this command!",
       ephemeral: true,
     });
+  }
+});
+
+client.on("messageCreate", async (message) => {
+  if (message.content.toLowerCase() === "cls") {
+    try {
+      // Fetch all messages in the channel
+      const messages = await message.channel.messages.fetch();
+
+      // Delete all messages
+      message.channel.bulkDelete(messages);
+    } catch (error) {
+      // Send the error message to the channel
+      message.channel.send(`An error occurred: ${error.message}`);
+    }
   }
 });
 
