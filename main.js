@@ -44,6 +44,7 @@ for (const file of commandFiles) {
 client.once(Events.ClientReady, () => {
   console.log(`Logged in as ${client.user.tag}!`);
   client.user.setActivity("www.gearo.ca", { type: ActivityType.Watching });
+  client.user.setStatus('idle');
 });
 
 client.on(Events.InteractionCreate, async (interaction) => {
