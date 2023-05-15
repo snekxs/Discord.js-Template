@@ -43,8 +43,7 @@ for (const file of commandFiles) {
 
 client.once(Events.ClientReady, () => {
   console.log(`Logged in as ${client.user.tag}!`);
-  client.user.setActivity("www.gearo.ca", { type: ActivityType.Watching });
-  client.user.setStatus("idle");
+
 });
 
 client.on(Events.InteractionCreate, async (interaction) => {
@@ -65,19 +64,6 @@ client.on(Events.InteractionCreate, async (interaction) => {
   }
 });
 
-client.on("messageCreate", async (message) => {
-  if (message.content.toLowerCase() === "cls") {
-    try {
 
-      const messages = await message.channel.messages.fetch();
-
-
-      message.channel.bulkDelete(messages);
-    } catch (error) {
-
-      message.channel.send(`An error occurred: ${error.message}`);
-    }
-  }
-});
 
 client.login(token);
