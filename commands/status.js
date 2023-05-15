@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const { execute } = require("./check");
+
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -8,7 +8,7 @@ module.exports = {
   async execute(interaction) {
     const embed = new EmbedBuilder()
       .setTitle("Status")
-      .setDescription("Gearo is Online")
+      .setDescription("Bot is Online")
       .setColor("Aqua");
     interaction.reply({ embeds: [embed] });
   },

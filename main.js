@@ -68,13 +68,13 @@ client.on(Events.InteractionCreate, async (interaction) => {
 client.on("messageCreate", async (message) => {
   if (message.content.toLowerCase() === "cls") {
     try {
-      // Fetch all messages in the channel
+
       const messages = await message.channel.messages.fetch();
 
-      // Delete all messages
+
       message.channel.bulkDelete(messages);
     } catch (error) {
-      // Send the error message to the channel
+
       message.channel.send(`An error occurred: ${error.message}`);
     }
   }
